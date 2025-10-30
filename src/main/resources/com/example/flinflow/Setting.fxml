@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.flinflow.SettingController"
+            style="-fx-background-color: linear-gradient(to bottom, #0A1929, #0D2B44);"
+            AnchorPane.topAnchor="0.0"
+            AnchorPane.bottomAnchor="0.0"
+            AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0">
+    
+    <!-- Header Section -->
+    <VBox layoutX="40" layoutY="50" spacing="8">
+        <Label text="Settings"
+               style="-fx-font-size: 52px; 
+                      -fx-text-fill: white; 
+                      -fx-font-weight: bold; 
+                      -fx-font-family: 'Segoe UI Light', 'Helvetica Neue', 'Arial';" />
+        <Label text="Manage your profile and preferences"
+               style="-fx-font-size: 15px; 
+                      -fx-text-fill: rgba(255,255,255,0.6); 
+                      -fx-font-weight: 400; 
+                      -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+    </VBox>
+    
+    <!-- Main Content Container - CENTERED -->
+    <HBox spacing="35" alignment="CENTER"
+          AnchorPane.leftAnchor="60"
+          AnchorPane.rightAnchor="60"
+          AnchorPane.topAnchor="170"
+          AnchorPane.bottomAnchor="60">
+        
+        <!-- Left Side - Profile Section -->
+        <VBox spacing="25" prefWidth="440">
+            
+            <VBox spacing="28" prefWidth="440" prefHeight="340"
+                  style="-fx-background-color: white; 
+                         -fx-background-radius: 16; 
+                         -fx-padding: 35;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0, 0, 8);">
+                
+                <!-- Card Header -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Profile" 
+                           style="-fx-font-size: 32px; 
+                                  -fx-text-fill: #1A1A1A; 
+                                  -fx-font-weight: 600; 
+                                  -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label text="●" 
+                           style="-fx-font-size: 12px; 
+                                  -fx-text-fill: #10B981;" />
+                    <Label text="Active" 
+                           style="-fx-font-size: 12px; 
+                                  -fx-text-fill: #4A5568; 
+                                  -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+                </HBox>
+                
+                <HBox spacing="32" alignment="CENTER_LEFT">
+                    <!-- Profile Image with Border -->
+                    <StackPane>
+                        <!-- Outer ring with gradient -->
+                        <Circle radius="68" 
+                                style="-fx-fill: linear-gradient(to bottom right, #4A90E2, #8B5CF6);" />
+                        <!-- White border -->
+                        <Circle radius="64" fill="white" />
+                        <!-- Inner circle background -->
+                        <Circle radius="60" fill="#5C5C5C" />
+                        <!-- Profile Image -->
+                        <ImageView fx:id="profileImage"
+                                   fitWidth="110" fitHeight="110"
+                                   preserveRatio="true">
+                            <clip>
+                                <Circle centerX="55" centerY="55" radius="55" />
+                            </clip>
+                        </ImageView>
+                    </StackPane>
+                    
+                    <!-- Info Fields - READ ONLY -->
+                    <VBox spacing="20" VBox.vgrow="ALWAYS">
+                        <!-- Username Field - Non-editable -->
+                        <VBox spacing="8">
+                            <Label text="Username" 
+                                   style="-fx-font-size: 12px; 
+                                          -fx-text-fill: #4A5568; 
+                                          -fx-font-weight: 600; 
+                                          -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';
+                                          -fx-letter-spacing: 0.5px;" />
+                            <TextField fx:id="usernameField" 
+                                       editable="false"
+                                       promptText="Loading..." 
+                                       prefWidth="260" prefHeight="42"
+                                       style="-fx-background-color: rgba(255,255,255,0.5); 
+                                              -fx-background-radius: 10; 
+                                              -fx-border-color: #CBD5E0;
+                                              -fx-border-radius: 10;
+                                              -fx-border-width: 1.5;
+                                              -fx-text-fill: #2D3748;
+                                              -fx-prompt-text-fill: #A0AEC0;
+                                              -fx-font-size: 14px;
+                                              -fx-padding: 10 15;
+                                              -fx-opacity: 0.9;
+                                              -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+                        </VBox>
+                        
+                        <!-- Full Name Field - Non-editable -->
+                        <VBox spacing="8">
+                            <Label text="Full Name" 
+                                   style="-fx-font-size: 12px; 
+                                          -fx-text-fill: #4A5568; 
+                                          -fx-font-weight: 600; 
+                                          -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';
+                                          -fx-letter-spacing: 0.5px;" />
+                            <TextField fx:id="fullnameField" 
+                                       editable="false"
+                                       promptText="Loading..." 
+                                       prefWidth="260" prefHeight="42"
+                                       style="-fx-background-color: rgba(255,255,255,0.5); 
+                                              -fx-background-radius: 10; 
+                                              -fx-border-color: #CBD5E0;
+                                              -fx-border-radius: 10;
+                                              -fx-border-width: 1.5;
+                                              -fx-text-fill: #2D3748;
+                                              -fx-prompt-text-fill: #A0AEC0;
+                                              -fx-font-size: 12px;
+                                              -fx-padding: 10 15;
+                                              -fx-opacity: 0.9;
+                                              -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+                        </VBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Back Button Only -->
+            <Button text="Back to Dashboard"
+                    prefWidth="440" prefHeight="50"
+                    onAction="#handleBackToDashboard"
+                     style="-fx-background-color: #4A90E2; 
+                           -fx-text-fill: white;
+                           -fx-font-weight: bold; 
+                           -fx-background-radius: 6;
+                           -fx-cursor: hand;
+                           -fx-border-color: rgba(255,255,255,0.2);
+                           -fx-border-width: 1.5;
+                           -fx-border-radius: 12;
+                           -fx-font-size: 14px;
+                           -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';">
+                <graphic>
+                    <Label text="←" style="-fx-font-size: 18px; -fx-text-fill: white; -fx-padding: 0 8 0 0;" />
+                </graphic>
+            </Button>
+             <!-- Logout Button -->
+                <Button text="Logout"
+                        prefWidth="210" prefHeight="50"
+                        onAction="#handleLogout"
+                        style="-fx-background-color: #e74c3c;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 6;
+                               -fx-cursor: hand;
+                               -fx-font-size: 14px;
+                               -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';
+                               -fx-effect: dropshadow(gaussian, rgba(231,76,60,0.4), 12, 0, 0, 4);">
+                    <graphic>
+                        <Label text="⎋" style="-fx-font-size: 18px; -fx-text-fill: white; -fx-padding: 0 8 0 0;" />
+                    </graphic>
+                </Button>
+        </VBox>
+        
+        <!-- Right Side - Chart Section with Stats -->
+        <VBox spacing="25" prefWidth="520" alignment="TOP_CENTER"
+              style="-fx-background-color: white; 
+                     -fx-background-radius: 16; 
+                     -fx-padding: 35;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0, 0, 8);">
+            
+            <!-- Chart Header -->
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <VBox spacing="4">
+                    <Label text="Financial Overview"
+                           style="-fx-font-size: 24px; 
+                                  -fx-text-fill: #1A1A1A; 
+                                  -fx-font-weight: 600; 
+                                  -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+                    <Label text="Income &amp; Expense Distribution"
+                           style="-fx-font-size: 13px; 
+                                  -fx-text-fill: #6B7280; 
+                                  -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="This Month" 
+                       style="-fx-font-size: 11px; 
+                              -fx-text-fill: #4A90E2;
+                              -fx-background-color: rgba(74, 144, 226, 0.12);
+                              -fx-padding: 6 14;
+                              -fx-background-radius: 16;
+                              -fx-font-weight: 600;
+                              -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+            </HBox>
+            
+            <!-- Chart and Legend Container -->
+            <HBox spacing="20" alignment="CENTER" VBox.vgrow="ALWAYS">
+                <!-- Chart Container -->
+                <StackPane prefWidth="320" prefHeight="320" alignment="CENTER">
+                    <PieChart fx:id="incomeExpenseChart"
+                              prefWidth="320" prefHeight="320"
+                              legendVisible="false"
+                              labelsVisible="false"
+                              startAngle="90"
+                              style="-fx-background-color: transparent;" />
+                </StackPane>
+                
+                <!-- Custom Legend - Stats Cards -->
+                <VBox fx:id="legendContainer" spacing="16" prefWidth="140" alignment="CENTER">              
+                </VBox>
+            </HBox>
+            
+            <HBox spacing="15" alignment="CENTER" 
+                  style="-fx-background-color: #0D2B44; 
+                         -fx-background-radius: 10; 
+                         -fx-padding: 15;">
+                <VBox spacing="4" alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <Label text="Net Flow"
+                           style="-fx-font-size: 15px; 
+                                  -fx-text-fill: white; 
+                                  -fx-font-weight: bold;
+                                  -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+                    <Label text="Income - Expense"
+                           style="-fx-font-size: 13px; 
+                                  -fx-text-fill: white;
+                                  -fx-font-weight: bold;
+                                  -fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';" />
+                </VBox>
+            </HBox>
+        </VBox>
+    </HBox>
+</AnchorPane>
