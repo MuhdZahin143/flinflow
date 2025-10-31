@@ -1,0 +1,4 @@
+--patch-module
+com.example.flinflow=_
+--add-reads
+com.example.flinflow=ALL-UNNAMED

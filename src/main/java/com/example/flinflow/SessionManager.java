@@ -18,7 +18,7 @@ public class SessionManager {
         currentUsername = username;
         currentFullName = fullName;
         currentUserId = userId;
-        System.out.println("✅ Session started for: " + fullName + " (@" + username + ")");
+        System.out.println("Session started for: " + fullName + " (@" + username + ")");
     }
     
     /**
@@ -64,7 +64,7 @@ public class SessionManager {
      */
     public static boolean validateSession() {
         if (!isLoggedIn()) {
-            System.out.println("⚠️ No active session found");
+            System.out.println(" No active session found");
             return false;
         }
         return true;

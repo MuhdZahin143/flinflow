@@ -50,11 +50,9 @@ public class SettingController implements Initializable {
         // Load user data from database
         loadUserDataFromDatabase();
         
-        // Setup chart dengan REAL DATA dari database
+        // Setup chart REAL DATA from database
         setupRealPieChart();
-        
-        // Animate chart on load
-        animateChartEntrance();
+      
     }
     
     private void loadProfileImage() {
@@ -62,7 +60,7 @@ public class SettingController implements Initializable {
             Image image = new Image(getClass().getResourceAsStream("profile.png"));
             profileImage.setImage(image);
         } catch (Exception e) {
-            System.out.println("⚠️ Profile image not found");
+            System.out.println("Profile image not found");
         }
     }
     
@@ -88,7 +86,7 @@ public class SettingController implements Initializable {
                 usernameField.setText(dbUsername);
                 fullnameField.setText(fullName);
                 
-                System.out.println("✅ User data loaded: " + fullName + " (@" + dbUsername + ")");
+                System.out.println(" User data loaded: " + fullName + " (@" + dbUsername + ")");
             } else {
                 showModernAlert("Error", "User not found in database", Alert.AlertType.ERROR);
             }
@@ -109,18 +107,18 @@ public class SettingController implements Initializable {
             double balance = financialData.getBalance();
             double total = totalIncome + totalExpense + Math.abs(balance);
             
-            // Create pie chart data TANPA label text (cleaner look)
+            // Create pie chart data without label text (cleaner look)
             PieChart.Data expenseData = new PieChart.Data("Expense", totalExpense);
             PieChart.Data incomeData = new PieChart.Data("Income", totalIncome);
             PieChart.Data balanceData = new PieChart.Data("Balance", Math.abs(balance));
             
-            // Set data ke chart
+            // Set data to chart
             incomeExpenseChart.setData(FXCollections.observableArrayList(
                 incomeData, expenseData, balanceData
             ));
             
-            // Chart settings untuk tampilan yang lebih clean
-            incomeExpenseChart.setLabelsVisible(false); // Hide default labels
+            // Chart settings for more clean
+            incomeExpenseChart.setLabelsVisible(false); 
             incomeExpenseChart.setLegendVisible(true);
             incomeExpenseChart.setLegendSide(Side.RIGHT);
             incomeExpenseChart.setStartAngle(90);
@@ -131,13 +129,13 @@ public class SettingController implements Initializable {
             incomeExpenseChart.layout();
             
             // Modern color scheme
-            incomeData.getNode().setStyle("-fx-pie-color: #F59E0B;");    // Amber/Gold
-            expenseData.getNode().setStyle("-fx-pie-color: #EC4899;");   // Pink
+            incomeData.getNode().setStyle("-fx-pie-color: #F59E0B;");    
+            expenseData.getNode().setStyle("-fx-pie-color: #EC4899;");   
             
             if (balance >= 0) {
-                balanceData.getNode().setStyle("-fx-pie-color: #10B981;"); // Green (positive)
+                balanceData.getNode().setStyle("-fx-pie-color: #10B981;"); 
             } else {
-                balanceData.getNode().setStyle("-fx-pie-color: #EF4444;"); // Red (negative)
+                balanceData.getNode().setStyle("-fx-pie-color: #EF4444;");
             }
             
             // Enhanced chart styling
@@ -147,72 +145,12 @@ public class SettingController implements Initializable {
                 "-fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';"
             );
             
-            // Customize legend appearance
-            incomeExpenseChart.lookupAll(".chart-legend-item-symbol").forEach(node -> {
-                node.setStyle("-fx-background-radius: 6; -fx-padding: 8;");
-            });
-            
-            incomeExpenseChart.lookupAll(".chart-legend-item").forEach(node -> {
-                if (node instanceof Label) {
-                    Label label = (Label) node;
-                    label.setStyle(
-                        "-fx-font-size: 13px; " +
-                        "-fx-font-weight: 600; " +
-                        "-fx-text-fill: #1F2937; " +
-                        "-fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';"
-                    );
-                }
-            });
-            
-            // Add hover effects with tooltip-like behavior
-            for (PieChart.Data data : incomeExpenseChart.getData()) {
-                Node node = data.getNode();
-                String dataName = data.getName();
-                double value = data.getPieValue();
-                double percentage = (value / total) * 100;
-                
-                // Create tooltip label
-                Label tooltip = new Label(String.format("%s\nRM %.2f (%.1f%%)", 
-                    dataName, value, percentage));
-                tooltip.setStyle(
-                    "-fx-background-color: rgba(0,0,0,0.85); " +
-                    "-fx-text-fill: white; " +
-                    "-fx-padding: 8 12; " +
-                    "-fx-background-radius: 6; " +
-                    "-fx-font-size: 12px; " +
-                    "-fx-font-weight: bold; " +
-                    "-fx-font-family: 'Segoe UI', 'Helvetica', 'Arial';"
-                );
-                tooltip.setVisible(false);
-                
-                node.setOnMouseEntered(e -> {
-                    ScaleTransition st = new ScaleTransition(Duration.millis(200), node);
-                    st.setToX(1.08);
-                    st.setToY(1.08);
-                    st.play();
-                    
-                    // Show value on hover
-                    node.setStyle(node.getStyle() + 
-                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 5);");
-                });
-                
-                node.setOnMouseExited(e -> {
-                    ScaleTransition st = new ScaleTransition(Duration.millis(200), node);
-                    st.setToX(1.0);
-                    st.setToY(1.0);
-                    st.play();
-                    
-                    node.setStyle(node.getStyle().replace(
-                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 5);", ""));
-                });
-            }
-            
             // Create custom legend if container exists
             if (legendContainer != null) {
                 createCustomLegend(financialData, total);
             }
             
-            System.out.println("✅ Pie Chart updated with real data:");
+            System.out.println("Pie Chart updated with real data:");
             System.out.println("   Income: RM " + totalIncome);
             System.out.println("   Expense: RM " + totalExpense);
             System.out.println("   Balance: RM " + balance);
@@ -263,7 +201,6 @@ public class SettingController implements Initializable {
     double totalExpense = 0;
     
     try (Connection conn = DatabaseConnection.getConnection()) {
-        // ✅ ONLY GET DATA FOR CURRENT USER
         String sql = "SELECT type, amount FROM transactions WHERE user_id = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         
@@ -283,7 +220,7 @@ public class SettingController implements Initializable {
             }
         }
         
-    } catch (SQLException e) {  // ✅ GUNA SQLException, BUKAN Exception
+    } catch (SQLException e) {  
         e.printStackTrace();
         throw new RuntimeException("Failed to fetch financial data from database: " + e.getMessage());
     }
@@ -307,26 +244,11 @@ public class SettingController implements Initializable {
         if (rs.next()) {
             return rs.getInt("id");
         }
-    } catch (SQLException e) {  // ✅ GUNA SQLException
+    } catch (SQLException e) {  
         e.printStackTrace();
     }
     return 0;
 }
-    
-    
-    private void animateChartEntrance() {
-        FadeTransition fade = new FadeTransition(Duration.millis(800), incomeExpenseChart);
-        fade.setFromValue(0.0);
-        fade.setToValue(1.0);
-        fade.play();
-        
-        ScaleTransition scale = new ScaleTransition(Duration.millis(800), incomeExpenseChart);
-        scale.setFromX(0.9);
-        scale.setFromY(0.9);
-        scale.setToX(1.0);
-        scale.setToY(1.0);
-        scale.play();
-    }
     
     @FXML
     private void handleBackToDashboard() {

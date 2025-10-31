@@ -30,15 +30,11 @@ public class DatabaseConnection {
             var stmt = conn.createStatement();
             var rs = stmt.executeQuery("SELECT COUNT(*) as count FROM users");
             if (rs.next()) {
-                System.out.println("✅ Users table found with " + rs.getInt("count") + " records");
+                System.out.println("Users table found with " + rs.getInt("count") + " records");
             }
             
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
- 
-            System.out.println("  1. Check MySQL94 service running in services.msc");
-            System.out.println("  2. Verify database 'finflow' exists in MySQL Workbench");
-            System.out.println("  3. Try different password if needed");
         }
     }
 }
